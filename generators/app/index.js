@@ -1,36 +1,64 @@
 'use strict';
 var yeoman = require('yeoman-generator');
-var chalk = require('chalk');
-var yosay = require('yosay');
+var path = require('path');
+var mkdirp = require('mkdirp');
+var extend = require('extend');
 
 module.exports = yeoman.Base.extend({
-  prompting: function () {
-    // Have Yeoman greet the user.
-    this.log(yosay(
-      'Welcome to the great ' + chalk.red('generator-reo-web-starter-kit') + ' generator!'
-    ));
+  initializing: function () {
+    this.props = {};
+  },
 
+  prompting: function () {
     var prompts = [{
-      type: 'confirm',
-      name: 'someAnswer',
-      message: 'Would you like to enable this option?',
-      default: true
+      name: 'name',
+      message: 'Site name',
+      default: path.basename(process.cwd())
+    }, {
+      name: 'author',
+      message: 'Author of site',
+      default: ''
     }];
 
     return this.prompt(prompts).then(function (props) {
-      // To access props later use this.props.someAnswer;
       this.props = props;
     }.bind(this));
   },
 
+  cd: function () {
+    if (path.basename(this.destinationPath()) !== this.props.name) {
+      this.destinationPath(this.props.name);
+      mkdirp(this.props.name);
+      this.destinationRoot(this.destinationPath(this.props.name));
+    }
+  },
+
   writing: function () {
-    this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
-    );
+    this.remote('reo7sp', 'reo-web-starter-kit', function (err, remote) {
+      if (err) {
+        throw err;
+      }
+
+      remote.directory('.', this.destinationPath());
+
+      var packageJson = this.fs.readJSON(this.destinationPath('package.json'));
+      extend(packageJson, true, {
+        name: this.props.name,
+        description: '',
+        author: this.props.author
+      });
+      ['repository', 'bugs', 'homepage'].forEach(function (it) {
+        delete packageJson[it];
+      });
+      this.fs.writeJSON(this.destinationPath('package.json'), packageJson);
+
+      ['LICENSE', 'README.md', 'configure'].forEach(function (it) {
+        this.fs.delete(this.destinationPath(it));
+      }.bind(this));
+    }.bind(this));
   },
 
   install: function () {
-    this.installDependencies();
+    this.installDependencies({bower: false});
   }
 });

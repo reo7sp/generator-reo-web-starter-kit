@@ -1,0 +1,3 @@
+[submodule "reo-web-starter-kit"]
+	path = reo-web-starter-kit
+	url = https://github.com/reo7sp/reo-web-starter-kit

@@ -6,13 +6,30 @@ var helpers = require('yeoman-test');
 describe('generator-reo-web-starter-kit:app', function () {
   before(function () {
     return helpers.run(path.join(__dirname, '../generators/app'))
-      .withPrompts({someAnswer: true})
+      .withPrompts({name: 'test'})
       .toPromise();
   });
 
-  it('creates files', function () {
+  it('uploads kit', function () {
     assert.file([
-      'dummyfile.txt'
+      'package.json',
+      'gulpfile.coffee',
+      'app/index.html',
+      'app/scripts/main.coffee',
+      'app/styles/main.sass',
+      'app/templates/_base.html'
     ]);
+  });
+
+  it('updates package.json', function () {
+    assert.noJsonFileContent('package.json', {
+      name: 'reo-web-starter-kit',
+      description: 'Boilerplate for sites',
+      author: 'Oleg Morozenkov'
+    });
+  });
+
+  it('deletes kit-specific files', function () {
+    assert.noFile(['LICENSE', 'README.md', 'configure']);
   });
 });

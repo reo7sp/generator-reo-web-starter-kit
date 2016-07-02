@@ -5,7 +5,7 @@
   "homepage": "https://github.com/reo7sp/reo-web-starter-kit",
   "author": {
     "name": "Oleg Morozenkov",
-    "email": "omorozenkov@gmail.com",
+    "email": "a@reo7sp.ru",
     "url": "http://reo7sp.ru"
   },
   "files": [
@@ -22,9 +22,9 @@
     "yeoman-generator"
   ],
   "dependencies": {
-    "yeoman-generator": "^0.23.0",
-    "chalk": "^1.0.0",
-    "yosay": "^1.0.0"
+    "extend": "^3.0.0",
+    "mkdirp": "^0.5.1",
+    "yeoman-generator": "^0.23.0"
   },
   "devDependencies": {
     "yeoman-test": "^1.0.0",
