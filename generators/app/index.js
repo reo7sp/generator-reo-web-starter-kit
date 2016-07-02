@@ -1,4 +1,5 @@
 'use strict';
+
 var yeoman = require('yeoman-generator');
 var path = require('path');
 var mkdirp = require('mkdirp');
@@ -27,8 +28,7 @@ module.exports = yeoman.Base.extend({
 
   cd: function () {
     if (path.basename(this.destinationPath()) !== this.props.name) {
-      this.destinationPath(this.props.name);
-      mkdirp(this.props.name);
+      mkdirp(this.destinationPath(this.props.name));
       this.destinationRoot(this.destinationPath(this.props.name));
     }
   },
@@ -42,7 +42,7 @@ module.exports = yeoman.Base.extend({
       remote.directory('.', this.destinationPath());
 
       var packageJson = this.fs.readJSON(this.destinationPath('package.json'));
-      extend(packageJson, true, {
+      extend(packageJson, {
         name: this.props.name,
         description: '',
         author: this.props.author
