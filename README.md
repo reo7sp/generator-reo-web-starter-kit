@@ -3,14 +3,14 @@
 
 ## Installation
 
-First, install [Yeoman](http://yeoman.io) and generator-reo-web-starter-kit using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+First, install [Yeoman](http://yeoman.io), [Gulp](http://gulpjs.com/) and generator-reo-web-starter-kit using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
 ```bash
-npm install -g yo
+npm install -g yo gulp-cli
 npm install -g generator-reo-web-starter-kit
 ```
 
-Then generate your new project:
+Then generate your new site:
 
 ```bash
 yo reo-web-starter-kit
