@@ -30,6 +30,6 @@ describe('generator-reo-web-starter-kit:app', function () {
   });
 
   it('deletes kit-specific files', function () {
-    assert.noFile(['LICENSE', 'README.md', 'configure']);
+    assert.noFile(['LICENSE', 'README.md']);
   });
 });

@@ -52,7 +52,7 @@ module.exports = yeoman.Base.extend({
       });
       this.fs.writeJSON(this.destinationPath('package.json'), packageJson);
 
-      ['LICENSE', 'README.md', 'configure'].forEach(function (it) {
+      ['LICENSE', 'README.md'].forEach(function (it) {
         this.fs.delete(this.destinationPath(it));
       }.bind(this));
     }.bind(this));
