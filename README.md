@@ -1,4 +1,4 @@
-# generator-reo-web-starter-kit [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+# generator-reo-web-starter-kit [![NPM version][npm-image]][npm-url]
 > Boilerplate for sites
 
 ## Installation
